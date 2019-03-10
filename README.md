@@ -1,24 +1,10 @@
-## STATE
-Release 1.8 Stable
+## Building the project
 
-Works on any esp32 board.  
-See the boards directory for a list of pre-configured boards.
-- The esp32 adds the output on the internal dac or with i2s to an external dac but only mp3 stations can be played.  
-Adding a vs1053 board, all stations can be played.  
-Compatible with esp8266 KaRadio addons.  
-- Serial or telnet commands : https://github.com/karawin/Ka-Radio32/blob/master/Interface.md
 
-### New
-A new android application is born  
-  
-- KaRadio Remote Control by Vassilis Serasidis on google Play.
+    export IDF_PATH=$HOME/Documents/ESPRadio/esp-idf
+    export PATH=$HOME/Documents/ESPRadio/xtensa-esp32-elf/bin:$PATH
+    make -j5 flash monitor
 
-It is an easy and fast WiFi remote control for your KaRadio or KaRadio32 hardware.  
-With this android app you can select the WebRadio station you want to play, set the volume and get the station information such as Station name, Genre, Bit rate, Meta data and more.   
-Found it at
-https://play.google.com/store/apps/details?id=com.serasidis.karadio.rc
-
-Thanks Vassilis.
 ## Added features from KaRadio
 Work with i2s, internal DAC or a vs1053.  
 Output mode set in Setting panel on web page of KaraDio32 :
@@ -69,13 +55,13 @@ To build your own release if you want to do some improvments, you must install t
 To flash all build output, run 'make flash' or :
 
 ```
-python /home/yourhome/esp/esp-idf/components/esptool_py/esptool/esptool.py \
-   --chip esp32 --port com5 --baud 460800 --before default_reset \
+esptool.py \
+   --chip esp32 --port /dev/cu.SLAB_USBtoUART --baud 460800 --before default_reset \
    --after hard_reset write_flash -u --flash_mode dio \
    --flash_freq 40m --flash_size detect \
-   0x1000 /home/yourhome/esp/Ka-Radio32/build/bootloader/bootloader.bin \
-   0x10000 /home/yourhome/esp/Ka-Radio32/build/KaRadio32.bin \
-   0x8000 /home/yourhome/esp/Ka-Radio32/build/partitions.bin
+   0x1000 build/bootloader/bootloader.bin \
+   0x10000 build/KaRadio32.bin \
+   0x8000 build/partitions.bin
 ```
 ### GPIO Definition 
 The default configuration is given below. It includes an encoder, an IR remote and a LCD or OLED.  

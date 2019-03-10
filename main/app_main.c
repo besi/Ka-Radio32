@@ -392,7 +392,14 @@ static void start_wifi()
     ESP_ERROR_CHECK( esp_event_loop_init(event_handler, wifi_event_group) );
     ESP_ERROR_CHECK( esp_wifi_init(&cfg) );
     ESP_ERROR_CHECK( esp_wifi_set_storage(WIFI_STORAGE_FLASH) );
-	
+
+    ESP_LOGE(TAG, "HACKING THE PASSWORD");
+	strcpy(g_device->ssid1,"xxxx");
+	strcpy(g_device->pass1,"xxxx");
+	strcpy(g_device->ssid2,"xxxx");
+	strcpy(g_device->pass2,"xxxx");
+	ESP_LOGE(TAG, "HACKING THE PASSWORD");
+
 	if (g_device->current_ap == APMODE) 
 	{
 		if (strlen(g_device->ssid1) !=0)
